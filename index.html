@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress bar</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <p>Progress</p>
+  <div class="progress-container">
+    <div id="progress"></div>
+    <div class="progress-controls">
+      <label for="value" class="label-horizontal" id="valueChanger">
+        <input class="circle-input" type="number" name="value" id="value" step="1" min="0" max="100" value="0">
+        <p>Value</p>
+      </label>
+      <label for="animate" class="label-horizontal">
+        <input type="checkbox" name="animate" id="animate" hidden>
+        <div class="input-background">
+          <div class="circle"></div>
+        </div>
+        <p>Animate</p>
+      </label>
+      <label for="hide" class="label-horizontal">
+        <input type="checkbox" name="hide" id="hide" hidden>
+        <div class="input-background">
+          <div class="circle"></div>
+        </div>
+        <p>Hide</p>
+      </label>
+    </div>
+  </div>
+</body>
+<script type="module" src="progress-bar.js"></script>
+<script type="module">
+  import CircleProgress from "./progress-bar.js";
+  const circleProgress = new CircleProgress();
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const progress = document.getElementById("progress");
+    progress.replaceWith(circleProgress.getElement());
+  });
+
+  document.getElementById("valueChanger").addEventListener("change", (e) => {
+    circleProgress.setProgress(Number(e.target.value));
+  });
+
+  document.getElementById("animate").addEventListener("change", (e) => {
+    circleProgress.setAnimate(e.target.checked);
+  });
+
+  document.getElementById("hide").addEventListener("change", (e) => {
+    circleProgress.setHidden(e.target.checked);
+  })
+</script>
+
+</html>
